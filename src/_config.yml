@@ -272,6 +272,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-redirect-from
   - jemoji
+  - jekyll-scholar
 
 # Mimic GitHub Pages with --safe
 whitelist:
@@ -281,6 +282,7 @@ whitelist:
   - jekyll-sitemap
   - jekyll-redirect-from
   - jemoji
+  - jekyll-scholar
 
 
 
@@ -319,3 +321,14 @@ compress_html:
   clippings: all
   ignore:
     envs: development
+
+
+# jekyll-scholar: builds the publications list from src/_bibliography/papers_selected.bib
+scholar:
+  style: src/_bibliography/ieee-full-authors.csl
+  source: ./_bibliography
+  bibliography: papers_selected.bib
+  bibliography_template: bib
+  sort_by: year, month
+  order: descending
+  bibliography_list_tag: ul
