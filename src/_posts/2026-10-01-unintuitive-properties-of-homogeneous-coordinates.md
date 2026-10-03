@@ -1,5 +1,5 @@
 ---
-title: "Representing a line with Homogeneous Coordinates (An unintuitive representation"
+title: "Representing a Line with Homogeneous Coordinates (An Unintuitive Representation)"
 date: 2026-10-01
 excerpt: "Coming soon."
 tags:
@@ -9,99 +9,114 @@ tags:
 ---
 
 
-Hello, today I am writing my first poster inspired by the great series of
-mathematics posts by [PENDING](). So, today I will be talking about some
-properties of homogenous coordinates in the context of computer vision that
-were extremely confusing for me in the beginning. 
+Hello! Today I am writing my first post, inspired by the great series of
+mathematics posts by [Gregory Gundersen](https://gregorygundersen.com/blog/2020/01/12/why-research-blog/). Today I will be talking about some
+properties of homogeneous coordinates in the context of computer vision that
+were extremely confusing to me in the beginning.
 
-Today, we will decipher the enimatic parametric representation of lines in
-homogenous of coordinates.
+Today, we will decipher the enigmatic parametric representation of lines in
+homogeneous coordinates:
 
-$$ X(lambda) = A + lambda * B $$
+$$
+X(\lambda) = A + \lambda B
+$$
 
-where X represents the points on the line between A and B. If you think about
-this from normal geometry perspective you should feel like me uncomfortable about hte
-fact that the expression above describe the points on the line between the
-ancher points.
+where $$X$$ represents the points on the line between $$A$$ and $$B$$. If you
+think about this from a normal geometry perspective, you should feel, like me,
+uncomfortable about the fact that the expression above describes the points on
+the line between the anchor points.
 
-The usual way I was taught to parametrize a line was by 
+The usual way I was taught to parametrize a line was
 
-$$ ~x(t) = a + t (dir) $$
+$$
+\tilde{X}(t) = \tilde{A} + t\,\widetilde{\text{Dir}}
+$$
 
-where a is a point that the line passes by and the $dir$ is a direction vector.
-Now if you had to non-homogenous points $~a$ and $~b$, the line representing
-two points would be 
+where $$\tilde{A}$$ is a point that the line passes through and $$\widetilde{\text{Dir}}$$
+is a direction vector. Now, if you had two non-homogeneous points
+$$\tilde{A}$$ and $$\tilde{B}$$, the line passing through the two points would be
 
-$$ ~x(t) = a + t (b-a)  = (1-t) a + t b $$
+$$
+\tilde{X}(t) = \tilde{A} + t(\tilde{B} - \tilde{A}) = (1 - t)\tilde{A} + t\tilde{B}
+$$
 
-In here we will reconciliate the non-intuitive representation in of a line
-between two homoegnoeus points. As a note this representation appears
-extensively in many proofs and explanation in computer vision classes so it is
-a very useful concept to have in mind.
+Here, we will reconcile this with the non-intuitive representation of a line
+between two homogeneous points. As a note, this representation appears
+extensively in many proofs and explanations in computer vision classes, so it
+is a very useful concept to have in mind.
 
 ## Background
 
-If you have never worked with homogenous coordinates, please don't expect an
-extensive study of this mathematical tool. In here my target audience are
-people who have had some exposure to the world projective geometry and homogenous
-coordinates in the context of computer vision. For people interested in a complete
-resource about the topic, I would recommended the first hand-written notes from
-Professor Avisah Kak in here (Not a beginners friendly material but a material
-that will give the basics get you back to this post to appreciate it more).
+If you have never worked with homogeneous coordinates, please don't expect an
+extensive study of this mathematical tool. Here, my target audience is people
+who have had some exposure to the world of projective geometry and homogeneous
+coordinates in the context of computer vision. For people interested in a
+complete resource on the topic, I would recommend the first hand-written notes
+from Professor Avinash Kak [here](https://engineering.purdue.edu/kak/computervision/) (not beginner-friendly material, but material
+that will give you the basics and get you back to this post to appreciate it
+more).
 
-The only thing that I will include for the sake of completeness is that in
-homogenous coordinates vectors get converted by adding an additional dimension
-to them and by keeping in mind the intepretation that information is contained
-in the ratio of the numbers. This last property means that all homegeonous
-entities are invariant to scalar multiplicative scalars. 
+The only thing that I will include for the sake of completeness is that, in
+homogeneous coordinates, vectors get converted by adding an additional
+dimension to them, keeping in mind the interpretation that the information is
+contained in the ratio of the numbers. This last property means that all
+homogeneous entities are invariant to multiplication by a non-zero scalar.
 
-so for instance the 2D vector $$ ~x = [x1, x2]$$ can be represented to homogenous coordinates
-by $$X =[x1,x2,1] $$ and that $$X = aX$$ where a can be any non-zero scalar.
-Notice the notation we will follow form this on. Non homogenous points will be
-represented with $~x$ while homogeonous representastion will be $x$.
+So, for instance, the 2D vector $$\tilde{X} = [x_1, x_2]$$ can be represented
+in homogeneous coordinates by $$X = [x_1, x_2, 1]$$, and $$X = aX$$, where
+$$a$$ can be any non-zero scalar. Notice the notation we will follow from now
+on: non-homogeneous points will be represented with $$\tilde{X}$$, while the
+homogeneous representation will be $$X$$.
 
 ## The geometric explanation
 
+To understand this parametrization geometrically lets observe the figure below. Here 
+![Lines generated by combinations of the vectors a and b: a + tb, ta + b, and (1 - t)a + tb]({{ "/images/blog/plot_for_hc_lines.png" | relative_url }})
+
 ## The algebraic explanation
 
-So algebraically is very simple to reconciliate both our line representations.
-Given points A and B, it is easy to see why the homogenous representation leads to
-a compact representation for the line between two points by following what happens
-to the last dimension of the vector. For simplicity we will work in 2d homogenous vectors.
+Algebraically, it is very simple to reconcile both of our line
+representations. Given points $$A$$ and $$B$$, it is easy to see why the
+homogeneous representation leads to a compact representation of the line
+between two points by following what happens to the last dimension of the
+vector. For simplicity, we will work with 2D homogeneous vectors.
 
-Starting with 
-$$
-X(lambda) = A + lamda B
-$$
-
-This can be written as 
+Starting with
 
 $$
-X(lambda ) = vector [a1 + lambda b1, ...  , .... ]
+X(\lambda) = A + \lambda B
 $$
 
-Since we only care about ratios in the vector this turns into 
-$$
-X(lambda) = vector[a1+ lambda/(1+lambda), ... ,...]
-$$
-
-Then by doing the parameter substitution of
+This can be written as
 
 $$
-t = lambda/(1+lambda) 
+X(\lambda) = [a_1 + \lambda b_1, \; a_2 + \lambda b_2, \; 1 + \lambda]
 $$
 
-and keeping in mind that 
+Since we only care about ratios in the vector, this turns into
 
 $$
-(1-t) = 1 /(a+lambda)
+X(\lambda) = \left[\frac{a_1 + \lambda b_1}{1 + \lambda}, \; \frac{a_2 + \lambda b_2}{1 + \lambda}, \; 1\right]
 $$
 
-you can convert the expresion above as 
+Then, by doing the parameter substitution
 
 $$
-~A(1-t) + t ~b = ~a + (~b-~a) * t
+t = \frac{\lambda}{1 + \lambda}
 $$
 
+and keeping in mind that
 
-$$x(t) = (1 - t)a + t *b $$
+$$
+1 - t = \frac{1}{1 + \lambda}
+$$
+
+you can convert the expression above into the following non-homogenous equation 
+
+$$
+\tilde{A}(1 - t) + t\tilde{B} = \tilde{A} + (\tilde{B} - \tilde{A})t
+$$
+
+$$
+\tilde{X}(t) = (1 - t)\tilde{A} + t\tilde{B}
+$$
