@@ -1,7 +1,7 @@
 ---
-title: "Representing a Line Between Two Points with Homogeneous Coordinates (An Intuitive Representation)"
+title: "An unintuitive parametrization for a Line Between Two Points with Homogeneous Coordinates"
 date: 2026-10-01
-excerpt: "Why does A + λB describe the line through two homogeneous points? A geometric and algebraic look at how dividing by the last coordinate recovers the familiar (1 − t)Ã + tB̃."
+excerpt: "Why does A + λB describe the line through two homogeneous points? A geometric and algebraic look at how dive."
 tags:
   - computer vision
 ---
