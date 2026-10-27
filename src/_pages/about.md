@@ -8,8 +8,8 @@ redirect_from:
   - /about.html
 ---
 
-Computer Science Ph.D. student with a strong background in robotics, machine
-learning, and simulation for surgical applications. Experienced in developing
+Computer Science Ph.D. student with a strong background in robotics, computer vision,
+machine learning, and simulation for surgical applications. Experienced in developing
 real-time systems that integrate medical imaging and sensorized instrumentation
 to improve surgical performance. Additional experience developing virtual
 reality (VR) and augmented reality (AR) systems for surgical navigation,
